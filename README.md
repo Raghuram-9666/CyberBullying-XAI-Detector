@@ -121,13 +121,13 @@ We welcome contributions! Please follow these steps:
 
 ## License
 
-This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
+
 
 ## Support
 
 If you encounter any issues or have questions, please:
 
-1. Check the [Issues](https://github.com/your-username/cyberbullying-detection/issues) page
+1. Check the [Issues](https://github.com/raghu9666/cyberbullying-detection/issues) page
 2. Create a new issue with detailed information
 3. Contact the development team
 

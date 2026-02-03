@@ -1,1 +1,37 @@
-deep_translator==1.11.4
+# Core scientific stack
+numpy==1.26.4
+pandas==2.2.3
+scikit-learn==1.6.1
+scipy==1.13.1
+matplotlib==3.9.4
+seaborn==0.13.2
+
+# Deep learning
+torch==2.7.0
+tensorflow==2.19.0
+transformers==4.31.0
+tokenizers==0.13.3
+
+# Explainability
+shap==0.48.0
+lime==0.2.0.1
+captum==0.8.0  # optional but safe to keep if using for torch explainability
+
+# NLP utilities
+emoji==2.14.1
+langdetect==1.0.9
+sentencepiece==0.2.0
+regex==2024.11.6
+
+# Hugging Face Datasets
+datasets==3.6.0
+
+# Model persistence
+dill==0.3.7
+pickle5==0.0.11 
+
+# App & frontend
+streamlit==1.45.1
+
+# Utility
+joblib==1.5.1

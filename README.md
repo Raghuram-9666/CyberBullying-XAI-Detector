@@ -2,42 +2,45 @@
 
 ## Overview
 
-Cyberbullying is a growing problem on social media, affecting an estimated 37% of young people worldwide. Traditional detection methods struggle with emerging challenges such as multilingual slang, emojis, and disguised toxicity. This project proposes a hybrid approach that combines state-of-the-art machine learning models with Explainable AI (XAI) techniques to build a transparent, robust, and multilingual cyberbullying detection system.
+Cyberbullying on social media is increasing, and manual moderation is difficult and time-consuming.
+This project focuses on detecting cyberbullying text using machine learning models and providing explanations for each prediction using Explainable AI (XAI) techniques.
+
+The system supports multilingual input and offers a Streamlit web interface where users can test messages, view predictions, and understand why a message is classified as toxic or non-toxic.
 
 ## Objectives
 
-- Develop a cyberbullying detection system with **at least 90% accuracy** on a diverse dataset containing over 167,000 examples
-- Incorporate **Explainable AI methods** (SHAP, LIME, attention visualization) to provide transparency and trust
-- Support **multilingual and emoji-aware** text processing to better handle real-world social media language
-- Implement **session-based detection** to consider conversational context
-- Enable **real-time moderation** with fast predictions and actionable insights
+- Build a cyberbullying detection system using ML and deep learning models
+- Provide explainability using SHAP, LIME, and attention visualization
+- Support multilingual text and emoji-based content
+- Perform both single-message and session-based analysis
+- Create a simple Streamlit web application for interaction
 
 ## Dataset
 
-The training data combines multiple sources:
+This project uses a combination of public datasets such as:
 
-- Jigsaw Toxic Comment Classification Dataset (~160,000 samples)
-- Emojis Dataset (~5,000 emoji-rich tweets)
-- Synthetic examples based on CONAN (~10,000 samples)
-- Indian Cyberbullying and other multilingual cyberbullying datasets
+- Jigsaw Toxic Comment Classification Dataset
+- Emoji-rich tweet datasets
+- Synthetic and conversational cyberbullying samples
+- Multilingual cyberbullying datasets
 
-The dataset consists of both single-message and session-based conversational examples.
+The dataset contains both single messages and conversation-level examples.
 
 ## Approach
 
-- Use transformer-based models (e.g., XLM-RoBERTa) for strong multilingual text classification
-- Complement with traditional machine learning models like Logistic Regression and SVM
-- Apply Explainable AI techniques to highlight key toxic words and phrases that influence predictions
-- Build a Streamlit-based user interface to interact with the detection system, visualize explanations, and support moderation workflows
+- Transformer-based model: XLM-RoBERTa
+- Traditional ML models: Logistic Regression, SVM, BiLSTM
+- Explainable AI methods to highlight important words
+- Streamlit UI for predictions and visualizatio
 
 ## Features
 
-- **Multilingual input support** - Detect cyberbullying across different languages
-- **Real-time toxicity detection** - Instant analysis of text input
-- **Conversation thread visualization** - Context-aware session analysis
-- **Downloadable PDF reports** - Generate detailed moderation reports
-- **Toxic comment flagging** - Automated content moderation
-- **Interactive controls** - Adjustable toxicity thresholds and customizable themes
+- **Multilingual text support**
+- **Real-time cyberbullying prediction**
+- **Explainability visualizations**
+- **Session-based conversation analysis**
+- **Batch CSV upload**
+- **Downloadable results**
 
 ## Project Structure
 
@@ -55,21 +58,21 @@ cyberbullying-detection/
 
 ## Installation
 
-1. **Clone the repository:**
+1. **Clone the repository**
    ```bash
    git clone https://github.com/your-username/cyberbullying-detection.git
    cd cyberbullying-detection
-   ```
-
-2. **Install dependencies:**
-   ```bash
    pip install -r requirements.txt
    ```
 
-3. **Run the Streamlit app:**
+2. **Run Application**
    ```bash
    streamlit run app.py
    ```
+
+## Web Application
+
+![Streamlit App](assets/app.png)
 
 ## Usage
 
@@ -88,28 +91,14 @@ cyberbullying-detection/
 
 ## Model Performance
 
-| Model | Accuracy | Precision | Recall | F1-Score |
-|-------|----------|-----------|---------|----------|
-| XLM-RoBERTa | 92.3% | 91.8% | 90.2% | 91.0% |
-| Logistic Regression | 87.5% | 86.2% | 85.9% | 86.0% |
-| SVM | 85.8% | 84.7% | 83.2% | 83.9% |
+Performance varies by dataset and model.
+Transformer models generally perform better than traditional ML models.
 
 ## Explainability Features
 
-- **SHAP Analysis:** Token-level importance scores for model predictions
-- **LIME Explanations:** Local interpretable model-agnostic explanations
-- **Attention Visualization:** Transformer attention weight visualization
-- **Feature Importance:** Traditional ML model feature analysis
-
-## Contributing
-
-We welcome contributions! Please follow these steps:
-
-1. Fork the repository
-2. Create a feature branch (`git checkout -b feature/amazing-feature`)
-3. Commit your changes (`git commit -m 'Add amazing feature'`)
-4. Push to the branch (`git push origin feature/amazing-feature`)
-5. Open a Pull Request
+- **SHAP token importance**
+- **LIME explanations**
+- **Attention visualization**
 
 ## References
 
@@ -119,18 +108,14 @@ We welcome contributions! Please follow these steps:
 - Maity et al., 2024 — Sentiment and explainability methods
 - El Koshiry et al., 2024 — Advances in explainable models
 
-## License
+## Team Members
 
+1. Raghuram Munagala
+2. HemanthvenkatadurgaSai Surendra Babu Imandi
+3. Jayaram Prakash Navudu
+4. Bhargavi Akula
 
-
-## Support
-
-If you encounter any issues or have questions, please:
-
-1. Check the [Issues](https://github.com/raghu9666/cyberbullying-detection/issues) page
-2. Create a new issue with detailed information
-3. Contact the development team
 
 ---
 
-**Thank you for exploring this cyberbullying detection system. We welcome feedback and contributions to improve its safety and effectiveness.**
+**Note: Developed as part of academic project work. Thank you for exploring this cyberbullying detection system.**

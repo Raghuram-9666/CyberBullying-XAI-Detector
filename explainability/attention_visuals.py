@@ -64,58 +64,53 @@ def visualize_xlmr_attention(text, layer=0, head=0):
         ax.text(0.5, 0.5, "Attention visualization failed", ha='center', va='center')
         return fig
 
+
+
 def visualize_session_attention(messages, attention_scores, top_k=3):
-    """
-    Enhanced session-level attention visualization
-    
-    Args:
-        messages: List of messages in session
-        attention_scores: Corresponding attention scores
-        top_k: Number of top messages to highlight
-    
-    Returns:
-        matplotlib Figure object
-    """
     try:
         if not messages or len(messages) != len(attention_scores):
-            raise ValueError("Messages and scores must be equal length")
-        
+            raise ValueError("Messages and attention_scores must be the same length.")
+
+        # Convert attention_scores to list if it's a numpy array
+        if hasattr(attention_scores, 'tolist'):
+            attention_scores = attention_scores.tolist()
+
+        print(f"🧪 [AttentionVisuals] Messages: {messages}")
+        print(f"🧪 [AttentionVisuals] Raw scores: {attention_scores}")
+
         fig, ax = plt.subplots(figsize=(12, 4))
         x_pos = np.arange(len(messages))
-        
-        # Handle divide by zero if all attention_scores are 0
+
         max_score = max(attention_scores) if attention_scores else 1
-        norm_scores = np.array(attention_scores) / max_score
-        
-        colors = plt.cm.Reds(norm_scores * 0.7 + 0.3)  # Color range
-        
+        norm_scores = np.array(attention_scores) / max_score if max_score != 0 else np.zeros_like(attention_scores)
+
+        colors = plt.cm.Reds(norm_scores * 0.7 + 0.3)
+
         bars = ax.bar(x_pos, attention_scores, color=colors, edgecolor='black')
-        
+
         # Highlight and annotate top messages
         if attention_scores:
             sorted_indices = np.argsort(attention_scores)[-top_k:]
             for i in sorted_indices:
                 ax.text(i, attention_scores[i] + 0.02, 
-                      f"{attention_scores[i]:.2f}", 
-                      ha='center', 
-                      fontsize=10,
-                      bbox=dict(facecolor='white', alpha=0.8, edgecolor='none'))
-        
-        # Formatting
+                        f"{attention_scores[i]:.2f}", 
+                        ha='center', 
+                        fontsize=10,
+                        bbox=dict(facecolor='white', alpha=0.8, edgecolor='none'))
+
         ax.set_xticks(x_pos)
         ax.set_xticklabels([f"Msg {i+1}" for i in range(len(messages))], rotation=45)
         ax.set_ylabel("Attention Score", fontsize=12)
         ax.set_title("Session Attention Distribution", pad=20, fontsize=14)
-        
-        # Add horizontal grid
         ax.yaxis.grid(True, linestyle='--', alpha=0.7)
         ax.set_axisbelow(True)
-        
+
         plt.tight_layout()
+        print("✅ Attention plot created successfully.")
         return fig
-        
+
     except Exception as e:
-        print(f"Session attention error: {str(e)}")
+        print(f"❌ Attention visualization error: {e}")
         fig, ax = plt.subplots(figsize=(10, 2))
         ax.text(0.5, 0.5, "Session visualization failed", ha='center', va='center')
         return fig

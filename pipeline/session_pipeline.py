@@ -10,7 +10,7 @@ def process_session(messages):
     start = time.time()
     if not shared_state.MODELS_LOADED:
         raise RuntimeError("Models not loaded! Call load_models() first")
-    
+
     if not messages:
         return {
             "prediction": "non-toxic",
@@ -18,48 +18,63 @@ def process_session(messages):
             "attention_plot": None,
             "toxic_messages": []
         }
-    
+
     try:
-        if len(messages) > SESSION_LENGTH:
-            messages = messages[-SESSION_LENGTH:]
-        
-        sequences = shared_state.BILSTM_TOKENIZER.texts_to_sequences(messages)
-        padded = pad_sequences(sequences, maxlen=shared_state.BILSTM_MODEL.input_shape[1], padding='post')
-        inputs = np.array(padded)
+        messages = messages[-3:]
+        tokenizer = shared_state.BILSTM_TOKENIZER
+        model = shared_state.BILSTM_MODEL
 
-        outputs = shared_state.BILSTM_MODEL(inputs, training=False)
+        tokenized = []
+        max_len = 50
 
-        # If your model returns logits and attentions
-        if isinstance(outputs, (list, tuple)) and len(outputs) == 2:
-            logits, attentions = outputs
-        else:
-            logits = outputs
-            attentions = np.zeros((len(messages),))  # dummy attentions if not provided
-        
-        probs = tf.nn.softmax(logits).numpy()
-        pred = np.argmax(probs)
-        conf = probs[0][pred]
+        for msg in messages:
+            tokens = tokenizer.texts_to_sequences([msg])[0]
+            padded_tokens = pad_sequences([tokens], maxlen=max_len, padding='post', truncating='post')[0]
+            tokenized.append(padded_tokens)
 
-        attn_scores = np.mean(attentions, axis=1).squeeze() if attentions.ndim > 1 else attentions
-        if attn_scores.ndim == 0:
-            attn_scores = np.array([attn_scores])
-        
+        inputs = np.expand_dims(np.array(tokenized), axis=0)
+        inputs_dict = {'input_layer_2': inputs}
+
+        outputs = model(inputs_dict, training=False)
+
+        logits = outputs.numpy()
+        print("🔢 Logits:", logits)
+
+        probs = tf.sigmoid(logits).numpy()
+        print("📊 Probabilities:", probs)
+
+        toxic_prob = probs[0][0]
+        THRESHOLD = 0.5
+        pred = 1 if toxic_prob > THRESHOLD else 0
+        conf = toxic_prob if pred == 1 else 1 - toxic_prob
+
+        print(f"🧠 [BiLSTM] Input messages: {messages}")
+        print(f"🧠 [BiLSTM] Toxicity Probability: {toxic_prob:.4f}, Threshold: {THRESHOLD}, Prediction: {pred}")
+        print(f"🧠 [BiLSTM] Confidence: {conf:.4f}")
+
+        # Dummy attention score logic for testing
+        attn_scores = [0.05 * (i+1) if pred == 1 else 0.0 for i in range(len(messages))]
+        print(f"🧠 [BiLSTM] Attention Scores: {attn_scores}")
+
+        plot = visualize_session_attention(messages, attn_scores) if any(attn_scores) else None
+        print("📉 Attention plot generated" if plot else "⚠️ No plot generated")
+
         result = {
             "prediction": "toxic" if pred == 1 else "non-toxic",
             "confidence": conf,
-            "attention_plot": visualize_session_attention(messages, attn_scores),
+            "attention_plot": plot,
             "toxic_messages": sorted(
                 [(msg, float(score)) for msg, score in zip(messages, attn_scores)],
                 key=lambda x: x[1],
                 reverse=True
             )[:3]
         }
-        end = time.time()
-        print(f"process_session took {end - start:.2f} seconds")
+
+        print(f"✅ process_session took {time.time() - start:.2f} seconds")
         return result
-        
+
     except Exception as e:
-        print(f"Error processing session: {e}")
+        print(f"❌ Error processing session: {e}")
         return {
             "prediction": "error",
             "confidence": 0.0,

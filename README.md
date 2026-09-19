@@ -1,121 +1,161 @@
-# Cyberbullying Detection Using Explainable AI
+# 🛡️ Cyberbullying Detection Using Explainable AI
 
-## Overview
+## 📌 Overview
 
-Cyberbullying on social media is increasing, and manual moderation is difficult and time-consuming.
-This project focuses on detecting cyberbullying text using machine learning models and providing explanations for each prediction using Explainable AI (XAI) techniques.
+Cyberbullying on social media platforms is increasing rapidly, making manual moderation difficult and time-consuming.
 
-The system supports multilingual input and offers a Streamlit web interface where users can test messages, view predictions, and understand why a message is classified as toxic or non-toxic.
+This project presents a multilingual cyberbullying detection system built using machine learning and transformer-based models, enhanced with Explainable AI (XAI) techniques to ensure transparency in predictions.
 
-## Objectives
-
-- Build a cyberbullying detection system using ML and deep learning models
-- Provide explainability using SHAP, LIME, and attention visualization
-- Support multilingual text and emoji-based content
-- Perform both single-message and session-based analysis
-- Create a simple Streamlit web application for interaction
-
-## Dataset
-
-This project uses a combination of public datasets such as:
-
-- Jigsaw Toxic Comment Classification Dataset
-- Emoji-rich tweet datasets
-- Synthetic and conversational cyberbullying samples
-- Multilingual cyberbullying datasets
-
-The dataset contains both single messages and conversation-level examples.
-
-## Approach
-
-- Transformer-based model: XLM-RoBERTa
-- Traditional ML models: Logistic Regression, SVM, BiLSTM
-- Explainable AI methods to highlight important words
-- Streamlit UI for predictions and visualizatio
-
-## Features
-
-- **Multilingual text support**
-- **Real-time cyberbullying prediction**
-- **Explainability visualizations**
-- **Session-based conversation analysis**
-- **Batch CSV upload**
-- **Downloadable results**
-
-## Project Structure
-
-```
-cyberbullying-detection/
-├── app.py                    # Main Streamlit application
-├── pipeline/                 # Text processing and model inference
-├── models/                   # Pretrained and trained model files
-├── components/               # Modular UI components
-├── explainability/           # SHAP, LIME, and attention visualization
-├── data/                     # Raw and processed datasets
-├── requirements.txt          # Python dependencies
-└── README.md                # Project documentation
-```
-
-## Installation
-
-1. **Clone the repository**
-   ```bash
-   git clone https://github.com/your-username/cyberbullying-detection.git
-   cd cyberbullying-detection
-   pip install -r requirements.txt
-   ```
-
-2. **Run Application**
-   ```bash
-   streamlit run app.py
-   ```
-
-## Web Application
-
-![Streamlit App](assets/app.png)
-
-## Usage
-
-1. **Single Text Analysis:**
-   - Enter text in the input field
-   - View toxicity predictions and confidence scores
-   - Explore explainable AI visualizations
-
-2. **Batch Processing:**
-   - Upload CSV files for bulk analysis
-   - Download processed results with explanations
-
-3. **Session Analysis:**
-   - Analyze conversation threads for context-aware detection
-   - Track toxicity patterns across message exchanges
-
-## Model Performance
-
-Performance varies by dataset and model.
-Transformer models generally perform better than traditional ML models.
-
-## Explainability Features
-
-- **SHAP token importance**
-- **LIME explanations**
-- **Attention visualization**
-
-## References
-
-- Mahmud et al., 2023 — Cyberbullying prevalence study
-- Philipo et al., 2024 — Transformer model performance
-- Yi and Zubiaga, 2022 — Session-based detection research
-- Maity et al., 2024 — Sentiment and explainability methods
-- El Koshiry et al., 2024 — Advances in explainable models
-
-## Team Members
-
-1. Raghuram Munagala
-2. HemanthvenkatadurgaSai Surendra Babu Imandi
-3. Jayaram Prakash Navudu
-4. Bhargavi Akula
-
+The system not only detects toxic content but also explains why a message is classified as toxic or non-toxic.  
+An interactive Streamlit web application allows real-time testing and visualization.
 
 ---
 
-**Note: Developed as part of academic project work. Thank you for exploring this cyberbullying detection system.**
+## 🎯 Objectives
+
+- Build a cyberbullying detection system using ML and transformer models  
+- Integrate Explainable AI techniques (SHAP, LIME, Attention)  
+- Support multilingual and emoji-rich text  
+- Perform single-message, batch, and session-based analysis  
+- Develop a user-friendly Streamlit web interface  
+
+---
+
+## 📊 Dataset
+
+This project combines multiple publicly available datasets:
+
+- Jigsaw Toxic Comment Classification Dataset  
+- Emoji-rich tweet datasets  
+- Multilingual cyberbullying datasets  
+- Synthetic and conversational cyberbullying samples  
+
+### Data Characteristics
+
+- Single-message classification samples  
+- Conversation-level examples for contextual analysis  
+- Multilingual content  
+- Emoji-inclusive text  
+
+### Preprocessing Steps
+
+- Text normalization  
+- Lowercasing  
+- Tokenization  
+- Stopword removal  
+- Emoji handling  
+- Multilingual encoding  
+
+---
+
+## 🧠 Models & Approach
+
+### Transformer Model
+- XLM-RoBERTa (Multilingual transformer-based model)
+
+### Traditional & Deep Learning Models
+- Logistic Regression  
+- Support Vector Machine (SVM)  
+- BiLSTM  
+
+Transformer-based models showed better contextual understanding compared to traditional ML models.
+
+---
+
+## 🔍 Explainable AI Integration
+
+To ensure transparency and avoid black-box predictions, the system integrates:
+
+- SHAP – Highlights token importance  
+- LIME – Provides local explanation of predictions  
+- Attention visualization – Displays word importance in deep learning models  
+
+These techniques allow users to understand why a message is flagged as toxic.
+
+---
+
+## 🚀 Key Features
+
+- Multilingual text support  
+- Real-time toxicity prediction  
+- Confidence score display  
+- SHAP & LIME visualizations  
+- Session-based conversation analysis  
+- Batch CSV upload  
+- Downloadable results  
+- Interactive Streamlit dashboard  
+
+---
+
+## 📂 Project Structure
+
+```
+Cyberbullying-Detection-Using-Explainable-AI/
+│
+├── app.py                    # Main Streamlit application  
+├── pipeline/                 # Text processing and model inference  
+├── models/                   # Trained model files  
+├── components/               # UI components  
+├── explainability/           # SHAP, LIME, attention modules  
+├── data/                     # Datasets  
+├── requirements.txt          # Dependencies  
+└── README.md                 # Documentation  
+```
+
+---
+
+## 💻 Installation
+
+### 1. Clone the repository
+
+```
+git clone https://github.com/Raghuram-9666/CyberBullying-XAI-Detector
+cd Cyberbullying-Detection-Using-Explainable-AI
+pip install -r requirements.txt
+```
+
+### 2. Run the application
+
+```
+streamlit run app.py
+```
+
+---
+
+## 🌐 Web Application
+
+![Home Page](assets/home.png)
+![French Home Page](assets/french_home.png)
+![Prediction Output](assets/prediction.png)
+![Explainability View](assets/explainability.png)
+
+---
+
+## 📈 Model Performance
+
+Performance varies depending on dataset and model type.
+
+- Transformer models outperform traditional ML models  
+- Session-based analysis improves contextual detection  
+- Explainable AI improves interpretability and trust  
+
+(Add actual accuracy / F1 score values here if available.)
+
+---
+
+## 📚 References
+
+- Mahmud et al., 2023 — Cyberbullying prevalence study  
+- Philipo et al., 2024 — Transformer model performance  
+- Yi and Zubiaga, 2022 — Session-based detection  
+- Maity et al., 2024 — Explainability methods  
+- El Koshiry et al., 2024 — Advances in explainable models  
+
+---
+
+## 👥 Team Members
+
+- Raghuram Munagala  
+- HemanthvenkatadurgaSai Surendra Babu Imandi  
+- Jayaram Prakash Navudu  
+- Bhargavi Akula  
